@@ -1,0 +1,15 @@
+global:
+  scrape_interval: 5s
+  evaluation_interval: 5s
+  external_labels:
+    cluster: gpu-training-local
+
+rule_files:
+  - "alerts.yml"
+
+scrape_configs:
+  - job_name: "gpuguard-java"
+    static_configs:
+      - targets: ["gpuguard:8080"]
+    metrics_path: /actuator/prometheus   # Spring Boot actuator endpoint
+    scrape_interval: 5s
